@@ -6,9 +6,9 @@ import org.example.movie2.dto.Movie2Request;
 import org.example.movie2.dto.Movie2Response;
 import org.example.movie2.service.Movie2Service;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,5 +21,10 @@ public class Movie2Controller {
             @RequestBody Movie2Request movie2Request
     ) {
         return ResponseEntity.ok(movie2Service.save(movie2Request));
+    }
+
+    @GetMapping("/movies2")
+    public ResponseEntity<List<Movie2Response>> getAllMovies() {
+        return ResponseEntity.ok(movie2Service.findAll());
     }
 }

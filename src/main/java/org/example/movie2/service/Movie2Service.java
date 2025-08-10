@@ -8,6 +8,7 @@ import org.example.movie2.repository.Movie2Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -24,5 +25,16 @@ public class Movie2Service {
                 savedMovie2.getId(),
                 savedMovie2.getTitle()
         );
+    }
+
+    // 영화 전체 조회
+    @Transactional(readOnly = true)
+    public List<Movie2Response> findAll() {
+        List<Movie2> movies2 = movie2Repository.findAll();
+        return movies2.stream()
+                .map(movie2 -> new Movie2Response(
+                        movie2.getId(),
+                        movie2.getTitle()
+                )).toList();
     }
 }
