@@ -69,4 +69,17 @@ public class Review2Service {
                 review2.getContent()
         );
     }
+
+    // 리뷰 수정
+    @Transactional
+    public Review2Response updatereview(Long reviewId, Review2Request request) {
+        Review2 review2 = review2Repository.findById(reviewId).orElseThrow(
+                () -> new IllegalArgumentException("그런 reviewId의 review는 찾을 수 없습니다.")
+        );
+        review2.updateReview(request.getContent());
+        return new Review2Response(
+                review2.getId(),
+                review2.getContent()
+        );
+    }
 }

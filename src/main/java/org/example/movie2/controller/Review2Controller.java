@@ -1,7 +1,6 @@
 package org.example.movie2.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.example.movie.dto.ReviewResponse;
 import org.example.movie2.dto.Review2Request;
 import org.example.movie2.dto.Review2Response;
 import org.example.movie2.service.Review2Service;
@@ -36,5 +35,13 @@ public class Review2Controller {
             @PathVariable Long reviewId
     ) {
         return ResponseEntity.ok(review2Service.findreviews(reviewId));
+    }
+
+    @PutMapping("/movies2/{movieId}/reviews/{reviewId}")
+    public ResponseEntity<Review2Response> updateReview(
+            @PathVariable Long reviewId,
+            @RequestBody Review2Request request
+    ) {
+        return ResponseEntity.ok(review2Service.updatereview(reviewId, request));
     }
 }

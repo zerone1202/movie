@@ -3,6 +3,7 @@ package org.example.movie2.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.example.movie2.dto.Review2Request;
 
 @Getter
 @Entity
@@ -22,4 +23,7 @@ public class Review2 {
         this.content = content;
         this.movie2 = movie2;
     }
+
+    public void updateReview(String content) {
+        this.content = content;}
 }
