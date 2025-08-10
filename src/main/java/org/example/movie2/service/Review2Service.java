@@ -10,6 +10,9 @@ import org.example.movie2.repository.Review2Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class Review2Service {
@@ -32,5 +35,26 @@ public class Review2Service {
                 savedReview.getId(),
                 savedReview.getContent()
         );
+    }
+
+    // 리뷰 조회 (전체 리뷰 조회)
+    @Transactional(readOnly = true)
+    public List<Review2Response> findAll(Long movieId) {
+        Movie2 movie2 = movie2Repository.findById(movieId).orElseThrow(
+                () -> new IllegalArgumentException("그런 movieId의 movie는 찾을 수 없습니다.")
+        );
+
+        List<Review2> movies = review2Repository.findAllByMovie2(movie2);
+        List<Review2Response> dtos = new ArrayList<>();
+
+        for (Review2 review2 : movies) {
+            dtos.add(
+                    new Review2Response(
+                            review2.getId(),
+                            review2.getContent()
+                    )
+            );
+        }
+        return dtos;
     }
 }

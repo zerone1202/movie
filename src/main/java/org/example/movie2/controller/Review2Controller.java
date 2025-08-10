@@ -5,10 +5,9 @@ import org.example.movie2.dto.Review2Request;
 import org.example.movie2.dto.Review2Response;
 import org.example.movie2.service.Review2Service;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,5 +21,12 @@ public class Review2Controller {
             @PathVariable Long movieId
     ) {
         return ResponseEntity.ok(review2Service.save(request,movieId));
+    }
+
+    @GetMapping("/movies2/{movieId}/reviews")
+    public ResponseEntity<List<Review2Response>> getAllReviews(
+            @PathVariable Long movieId
+    ) {
+        return ResponseEntity.ok(review2Service.findAll(movieId));
     }
 }
