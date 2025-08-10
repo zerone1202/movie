@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.Id;
+import org.example.movie2.dto.Movie2Request;
 
 @Getter
 @Entity
@@ -18,6 +19,10 @@ public class Movie2 {
     private String title;
 
     public Movie2(String title) {
+        this.title = title;
+    }
+
+    public void updateMovie(String title) {
         this.title = title;
     }
 }

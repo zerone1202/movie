@@ -49,4 +49,17 @@ public class Movie2Service {
                 movie2.getTitle()
         );
     }
+
+    // 영화 수정
+    @Transactional
+    public Movie2Response updateMovie(Long movieId, Movie2Request movie2Request) {
+        Movie2 movie2 = movie2Repository.findById(movieId).orElseThrow(
+                () -> new IllegalArgumentException("그런 movieId의 movie는 찾을 수 없습니다.")
+        );
+        movie2.updateMovie(movie2Request.getTitle());
+        return new Movie2Response(
+                movie2.getId(),
+                movie2.getTitle()
+        );
+    }
 }

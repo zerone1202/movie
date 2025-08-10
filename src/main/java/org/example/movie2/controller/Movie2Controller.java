@@ -34,4 +34,12 @@ public class Movie2Controller {
     ) {
         return ResponseEntity.ok(movie2Service.findMovies(movieId));
     }
+
+    @PutMapping("/movies2/{movieId}")
+    public ResponseEntity<Movie2Response> updateMovie(
+            @PathVariable Long movieId,
+            @RequestBody Movie2Request movie2Request
+    ) {
+        return ResponseEntity.ok(movie2Service.updateMovie(movieId, movie2Request));
+    }
 }
