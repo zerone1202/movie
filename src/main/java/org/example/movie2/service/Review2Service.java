@@ -57,4 +57,16 @@ public class Review2Service {
         }
         return dtos;
     }
+
+    // 리뷰 조회 (선택 리뷰 조회)
+    @Transactional(readOnly = true)
+    public Review2Response findreviews(Long reviewId) {
+        Review2 review2 = review2Repository.findById(reviewId).orElseThrow(
+                () -> new IllegalArgumentException("그런 reviewId의 review는 찾을 수 없습니다.")
+        );
+        return new Review2Response(
+                review2.getId(),
+                review2.getContent()
+        );
+    }
 }
